@@ -1,0 +1,27 @@
+import librosa
+import numpy as np
+
+audio_file = '/content/video_audio3.mp3'
+y, sr = librosa.load(audio_file, sr=None)
+def compute_fluency_score(audio_data, sampling_rate):
+    features = extract_features(audio_data, sampling_rate)
+    fluency_score = process_features(features)
+    return fluency_score
+
+
+def extract_features(audio_data, sampling_rate):
+
+    spectral_centroid = librosa.feature.spectral_centroid(y=audio_data, sr=sampling_rate)[0]
+    zero_crossing_rate = librosa.feature.zero_crossing_rate(y=audio_data)[0]
+    features = np.vstack((spectral_centroid, zero_crossing_rate)).T
+    return features
+
+def process_features(features):
+    normalized_features = (features - features.min(axis=0)) / (features.max(axis=0) - features.min(axis=0) + 1e-10)
+    
+    fluency_score = np.mean(normalized_features)
+    
+    return fluency_score
+
+fluency_score = compute_fluency_score(y, sr)
+print("Fluency score:", fluency_score)
