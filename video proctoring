@@ -1,0 +1,6 @@
+import cv2
+import supervision as sv
+from ultralytics import YOLO
+
+model = YOLO('yolov8m-pose.pt')
+results =model(source= "https://10.160.193.81:8080/video", show=True,conf=0.3,save=True)  // input the video streaming link 
