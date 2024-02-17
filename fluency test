@@ -1,0 +1,44 @@
+import speech_recognition as sr
+import re
+
+def calculate_fluency(recognized_text):
+    pauses = len(re.findall(r'\b[pP][aA][uU][sS][eE]\b', recognized_text))
+    repetitions = len(re.findall(r'\b([a-zA-Z]+)\s+\1\b', recognized_text))
+    fluency_score = pauses + repetitions
+
+    return fluency_score
+
+def recognize_speech():
+    recognizer = sr.Recognizer()
+
+    with sr.Microphone() as source:
+        print("Say something:")
+        try:
+            # Record audio for 10 seconds
+            audio = recognizer.listen(source, timeout=10)
+            print("Recording complete.")
+        except sr.WaitTimeoutError:
+            print("Recording timed out after 10 seconds.")
+            return None
+
+    try:
+        text = recognizer.recognize_google(audio)
+        print("You said:", text)
+        return text
+    except sr.UnknownValueError:
+        print("Sorry, could not understand audio.")
+        return None
+    except sr.RequestError as e:
+        print("Error connecting to Google API: {0}".format(e))
+        return None
+
+if __name__ == "__main__":
+    original_text = "Hello, how are you?"
+    recognized_text = recognize_speech()
+
+    if recognized_text:
+        print("\nOriginal Text:", original_text)
+        print("Recognized Text:", recognized_text)
+
+        fluency_score = calculate_fluency(recognized_text)
+        print("Fluency Score:", fluency_score)
