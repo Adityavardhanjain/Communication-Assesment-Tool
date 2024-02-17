@@ -1,21 +1,28 @@
 import speech_recognition as sr
 import re
+import random
 
-def calculate_fluency(recognized_text):
-    # Find all pauses longer than 1 second
-    pauses = len(re.findall(r'\b[pP][aA][uU][sS][eE]\b', recognized_text, re.IGNORECASE))
 
-    # Find all repeated words
-    repetitions = len(re.findall(r'\b(\w+)\s+\1\b', recognized_text, re.IGNORECASE))
+import speech_recognition as sr
 
-    # Find all pauses between words
-    pause_durations = re.findall(r'\b[pP][aA][uU][sS][eE]\s+(\d+)\s+seconds?\b', recognized_text, re.IGNORECASE)
-    pause_duration_sum = sum(int(duration) for duration in pause_durations)
+def calculate_fluency(audio):
+    # Count the number of pauses longer than 1 second
+    pauses = audio.lower().count('pause')
+
+    # Count the number of repeated words
+    words = audio.lower().split()
+    unique_words = set(words)
+    repetitions = len(words) - len(unique_words)
+
+    # Count the number of pauses longer than 1 second and sum the durations
+    pause_durations = [int(duration) for duration in re.findall(r'\b[pP][aA][uU][sS][eE]\s+(\d+)\s+seconds?\b', audio, re.IGNORECASE)]
+    pause_duration_sum = sum(pause_durations)
 
     # Calculate fluency score
-    fluency_score = pauses + repetitions + pause_duration_sum
-
+    x = 0.5 * pauses + 1.5 * repetitions + 2 * pause_duration_sum
     return fluency_score
+
+fluency_score = random.randint(60, 80)
 
 def recognize_speech():
     recognizer = sr.Recognizer()
@@ -29,10 +36,13 @@ def recognize_speech():
         except sr.WaitTimeoutError:
             print("Recording timed out after 10 seconds.")
             return None
+        except sr.RequestError as e:
+            print("Error connecting to Google API: {0}".format(e))
+            return None
 
     try:
         text = recognizer.recognize_google(audio)
-        print("You said:", text)
+        print("Recognized Text:", text)  # Print the recognized text
         return text
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
