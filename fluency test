@@ -2,9 +2,18 @@ import speech_recognition as sr
 import re
 
 def calculate_fluency(recognized_text):
-    pauses = len(re.findall(r'\b[pP][aA][uU][sS][eE]\b', recognized_text))
-    repetitions = len(re.findall(r'\b([a-zA-Z]+)\s+\1\b', recognized_text))
-    fluency_score = pauses + repetitions
+    # Find all pauses longer than 1 second
+    pauses = len(re.findall(r'\b[pP][aA][uU][sS][eE]\b', recognized_text, re.IGNORECASE))
+
+    # Find all repeated words
+    repetitions = len(re.findall(r'\b(\w+)\s+\1\b', recognized_text, re.IGNORECASE))
+
+    # Find all pauses between words
+    pause_durations = re.findall(r'\b[pP][aA][uU][sS][eE]\s+(\d+)\s+seconds?\b', recognized_text, re.IGNORECASE)
+    pause_duration_sum = sum(int(duration) for duration in pause_durations)
+
+    # Calculate fluency score
+    fluency_score = pauses + repetitions + pause_duration_sum
 
     return fluency_score
 
