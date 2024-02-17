@@ -12,7 +12,6 @@ Use Cases: Aligns audio with phonetic transcriptions, identifies mispronunciatio
 Conclusion: Montserrat Force Aligner offers an efficient solution for phonetics checking, enhancing speech technology and language education.
 Keywords: Montserrat Force Aligner, Phonetics Checking, Speech Alignment.
 
-Utilizing PyAnnote.Audio for Smoothness Recognition
 2) Smoothness and  fluency Recognition (PyAnnote.Audio)
 Introduction: PyAnnote.Audio aids in smoothness recognition, speaker diarization, and embedding for speech processing.
 Features: Tools for speaker segmentation, embedding, smoothness quantification, suitable for various applications.
