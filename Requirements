@@ -1,5 +1,3 @@
-python_language_tool
-Speechrecognition
-gtts
-PyAudio
-textstat
+Grammar - python_language_tool
+Pronunciation - Speechrecognition, gtts
+Readability - textstat
