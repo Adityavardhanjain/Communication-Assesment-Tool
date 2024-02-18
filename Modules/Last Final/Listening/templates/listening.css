@@ -1,0 +1,20 @@
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    audio {
+        width: 300px;
+        outline: none;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+</style>

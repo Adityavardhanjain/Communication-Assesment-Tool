@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening Test</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #audioPlayer {
+            margin-top: 20px;
+        }
+
+        #speechForm {
+            margin-top: 20px;
+        }
+
+        #speechBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #speechBtn:hover {
+            background-color: #34495e;
+        }
+
+        #submitBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: none;
+        }
+
+        #submitBtn:hover {
+            background-color: #34495e;
+        }
+
+        /* Audio player styles */
+        audio {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listening Test Demo</h1>
+
+    <!-- Play the generated speech -->
+    <audio id="audioPlayer" controls>
+        <source src="{{ audio_filename }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Button to start speech recognition -->
+    <button id="speechBtn" onclick="startSpeechRecognition()">Start Speech Recognition</button>
+
+    <!-- Form for displaying recognized text -->
+    <form id="speechForm" action="/speech_recognition" method="post" style="display: none;">
+        <input type="hidden" id="generatedSpeech" name="generated_speech" value="">
+        <input type="submit" id="submitBtn" value="Submit">
+    </form>
+
+    <script>
+        function startSpeechRecognition() {
+            // Hide the button
+            document.getElementById('speechBtn').style.display = 'none';
+            
+            // Show the form
+            document.getElementById('speechForm').style.display = 'block';
+
+            // Capture user's speech using browser speech recognition
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.onresult = function (event) {
+                var transcript = event.results[0][0].transcript;
+                document.getElementById('generatedSpeech').value = transcript;
+
+                // Show the submit button and disable further speech recognition
+                document.getElementById('submitBtn').style.display = 'block';
+                recognition.stop();
+            };
+
+            recognition.start();
+        }
+    </script>
+</body>
+</html>

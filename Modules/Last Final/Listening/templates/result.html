@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening Test Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .result-box {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .result-value {
+            color: #666;
+        }
+
+        #accuracy {
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Listening Test Result</h1>
+
+        <!-- Recognized Text Result -->
+        <div class="result-box">
+            <div class="result-label">Recognized Text:</div>
+            <div class="result-value">{{ recorded_text }}</div>
+        </div>
+
+        <!-- Accuracy Result -->
+        <div class="result-box">
+            <div class="result-label">Accuracy:</div>
+            <div class="result-value">{{ accuracy }}%</div>
+            <div class="result-label">Pronunciation Result:</div>
+            <div class="result-value">{{ pronunciation_result }}</div>
+        </div>
+    </div>
+</body>
+</html>

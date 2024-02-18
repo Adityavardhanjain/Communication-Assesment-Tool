@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="writing.css">
+    <title>Writing Test</title>
+<style>
+/* Resetting default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Header styles */
+header {
+    background-color:   #2c3e50;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* Main styles */
+main {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Label styles */
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Textarea styles */
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color:  #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #5B6D81;
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <h1>Writing Test</h1>
+        <p>Check the grammar of your paragraph</p>
+    </header>
+    <main>
+        <form method="post" action="/check_grammar">
+            <label for="paragraphInput">Enter a paragraph:</label>
+            <textarea name="paragraphInput" rows="5" id="paragraphInput" style="width: 100%;"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </main></body>
+</html>
