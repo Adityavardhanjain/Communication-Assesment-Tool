@@ -1,6 +1,43 @@
+from mtcnn.mtcnn import MTCNN
 import cv2
-import supervision as sv
-from ultralytics import YOLO
 
-model = YOLO('yolov8m-pose.pt')
-results =model(source= "https://10.160.193.81:8080/video", show=True,conf=0.3,save=True)  // input the video streaming link 
+def detect_faces_mtcnn():
+    # Load the MTCNN face detector
+    detector = MTCNN()
+
+    # Open a connection to the webcam (0 indicates the default camera)
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        # Read a frame from the webcam
+        ret, frame = cap.read()
+
+        # Detect faces in the frame
+        faces = detector.detect_faces(frame)
+
+        # If faces are detected, draw rectangles around them
+        if len(faces) > 0:
+            for face in faces:
+                x, y, w, h = face['box']
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+
+            cv2.putText(frame, "Face Detected", (50, 50),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        else:
+            # Display the message when no faces are detected
+            cv2.putText(frame, "Face Not Detected", (50, 50),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+
+        # Display the frame
+        cv2.imshow('Face Detection', frame)
+
+        # Break the loop if the 'q' key is pressed
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # Release the webcam and close the OpenCV windows
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    detect_faces_mtcnn()
