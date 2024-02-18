@@ -38,7 +38,7 @@ The web cam runs in the background without disturbance for all other cases.
 
 # Steps to reproduce
 
-1. Download all requirements (See requirements.txt)
+1. Install all requirements (See requirements.txt)
 2. Allow microphone, web camera and file access from your browser
 3. Run main.py
 4. Use your own examples or the ones given in demo files
