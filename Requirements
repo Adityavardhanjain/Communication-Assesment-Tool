@@ -1,7 +1,0 @@
-Grammar - python_language_tool
-Pronunciation - Speechrecognition, gtts
-Readability - textstat
-audio analysis and processing - librosa 
-checking the fluency in speaking by the person - pyannote.audio , praat 
-face head detection using object detection with increasing performance - cv2,  Dlib,  Mediapie
-Listening - random, os
