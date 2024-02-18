@@ -1,7 +1,7 @@
 ---
-name: "Communication Assessment Tool"
-about: Comprehensive communication assessment tool with video proctoring
-labels: NLP Communication Assessment 
+Name: "Communication Assessment Tool"
+About: Comprehensive communication assessment tool with video proctoring
+Labels: NLP Communication Assessment 
 
 ---
 
